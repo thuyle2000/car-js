@@ -1,0 +1,100 @@
+<style>
+    .number {
+        text-align: right;
+        padding-right: 1rem;
+    }
+
+    #confirm {
+        width: 50%;
+        margin: auto;
+        padding: 2em;
+        display: none;
+        border: lightslategray medium solid;
+    }
+</style>
+
+<div class="container">
+    <h2>Your Detailed Orders</h2>
+    <hr>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th class="number">Price</th>
+                <th class="number">Quantity</th>
+                <th class="number">Amount</th>
+            </tr>
+        </thead>
+        <tbody id="cart">
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4" style="text-align: right">Total Amount: </td>
+                <td class="number" id="cart-total" style="font-weight: bold;">{{total}}</td>
+
+            </tr>
+            <tr>
+                <th colspan="5" style="text-align: right">
+                    <input type="button" class="btn btn-danger" value="Remove all"
+                        id="removeAll">
+                    <br>
+                    <input type="button" class="btn btn-info"  value="Checkout" id="checkout">
+                    <input type="button" class="btn btn-info"  value=" Continue shopping" id="shopping">
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div id="confirm">
+        <h3>We are here for you !</h3>
+        <p>Please complete and submit the following form.</p>
+        <form action="" id="form-checkout" method="POST">
+            <div class="form-group">
+                <input type="text" name="txtName" required placeholder="Name" class="form-control" value="fpt-aptech">
+            </div>
+            <div class="form-group">
+                <input type="text" name="txtEmail" required placeholder="Email" class="form-control" value="590 CMT8 HCMC">
+            </div>
+            <div class="form-group">
+                <input type="text" name="txtPhone" required placeholder="Phone" class="form-control" value="123-456-999">
+            </div>
+            <div class="form-group">
+                <textarea name="txtNote" class="form-control" rows="5">
+                        comments
+                        </textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-success">
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#shopping").on("click", function () {
+        $("#Menu").click();      
+    });
+
+    $("#removeAll").on("click", function () {
+        localStorage.removeItem("cart");
+        $("#cart").empty();
+
+    });
+
+    $("#checkout").on("click", function () {
+        if(localStorage.getItem("cart")!=null){
+            $("#confirm").show();
+        }       
+    });
+
+    $("#form-checkout").on("submit", function () {
+        alert("Thanks for your order !");
+        $("#confirm").hide();
+        localStorage.removeItem("cart");
+      
+        
+    });
+
+
+</script>
